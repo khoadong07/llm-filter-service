@@ -1,0 +1,64 @@
+version: '3.2'
+
+services:
+  llm-service-1:
+    image: "dangkhoa0894/llm-service-fastapi:latest"
+    container_name: llm-service-1
+    environment:
+      - SERVICE_NAME=llm-service-1
+    env_file:
+      - .env
+    volumes:
+      - ./logs-service-1:/app/logs
+    networks:
+      llm-network:
+        ipv4_address: "192.168.2.10"
+
+  llm-service-2:
+    image: "dangkhoa0894/llm-service-fastapi:latest"
+    container_name: llm-service-2
+    environment:
+      - SERVICE_NAME=llm-service-2
+    env_file:
+      - .env
+    volumes:
+      - ./logs-service-2:/app/logs
+    networks:
+      llm-network:
+        ipv4_address: "192.168.2.11"
+
+  llm-service-3:
+    image: "dangkhoa0894/llm-service-fastapi:latest"
+    container_name: llm-service-3
+    environment:
+      - SERVICE_NAME=llm-service-3
+    env_file:
+      - .env
+    volumes:
+      - ./logs-service-3:/app/logs
+    networks:
+      llm-network:
+        ipv4_address: "192.168.2.12"
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - 9999:9999
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - llm-service-1
+      - llm-service-2
+      - llm-service-3
+    networks:
+      llm-network:
+        ipv4_address: "192.168.3.5"
+
+networks:
+  llm-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "192.168.0.0/16"
+          gateway: "192.168.0.1"

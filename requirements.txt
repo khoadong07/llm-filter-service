@@ -1,0 +1,8 @@
+fastapi==0.109.1
+uvicorn==0.27.0
+requests
+python-dotenv
+loguru
+re
+transformers==4.26.0
+torch==2.2.2
