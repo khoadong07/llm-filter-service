@@ -1,9 +1,13 @@
 from pydantic import BaseModel
 from typing import List
 
-class PredictRequest(BaseModel):
+class PredictContent(BaseModel):
     id: str
-    content: List[str]
+    content: str
+
+class PredictRequest(BaseModel):
+    domain: str
+    contents: List[PredictContent]
     
 
 class PredictionResult(BaseModel):
@@ -12,7 +16,6 @@ class PredictionResult(BaseModel):
     prob: float
     
 class PredictResponse(BaseModel):
-    id: str
     processing_time: float
     request_time: float
     results: List[PredictionResult]

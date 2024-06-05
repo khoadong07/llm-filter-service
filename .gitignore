@@ -1,2 +1,4 @@
 logs/
 model/
+__pycache__/
+.gitignore

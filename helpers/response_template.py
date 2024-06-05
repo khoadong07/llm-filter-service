@@ -7,6 +7,7 @@ def success(message: str, data: None):
         "data": data,
         "result": 1
     }
+    print(content)
     return JSONResponse(
         status_code=200,
         content=content
