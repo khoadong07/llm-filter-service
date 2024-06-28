@@ -7,6 +7,7 @@ class PredictContent(BaseModel):
 
 class PredictRequest(BaseModel):
     domain: str
+    lang_detect: bool
     contents: List[PredictContent]
     
 

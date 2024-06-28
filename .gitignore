@@ -2,3 +2,5 @@ logs/
 model/
 __pycache__/
 .gitignore
+.idea/vcs.xml
+.idea/misc.xml
